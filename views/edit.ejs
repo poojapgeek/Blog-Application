@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Post</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Edit Post</h1>
+    </header>
+    <main>
+        <section class="edit-post">
+            <form action="/edit/<%= post.id %>" method="POST" enctype="multipart/form-data">
+                <input type="text" name="title" value="<%= post.title %>" required>
+                <textarea name="content" required><%= post.content %></textarea>
+                <input type="file" name="image">
+                <% if (post.image) { %>
+                    <p>Current Image: <img src="<%= post.image %>" alt="Post Image" class="post-image"></p>
+                <% } %>
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+    </main>
+</body>
+</html>

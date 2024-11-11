@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Home</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>My Blog</h1>
+    </header>
+    <main>
+        <section class="create-post">
+            <h2>Create a New Post</h2>
+            <form action="/create" method="POST" enctype="multipart/form-data">
+                <input type="text" name="title" placeholder="Title" required>
+                <textarea name="content" placeholder="Content" required></textarea>
+                <input type="file" name="image">
+                <button type="submit">Add Post</button>
+            </form>
+        </section>
+        <section class="posts">
+            <h2>All Posts</h2>
+            <% if (posts.length > 0) { %>
+                <% posts.forEach(post => { %>
+                    <div class="post">
+                        <h3><%= post.title %></h3>
+                        <p><%= post.content %></p>
+                        <% if (post.image) { %>
+                            <img src="<%= post.image %>" alt="Post Image" class="post-image">
+                        <% } %>
+                        <div class="post-actions">
+                            <form action="/edit/<%= post.id %>" method="GET">
+                                <button>Edit</button>
+                            </form>
+                            <form action="/delete/<%= post.id %>" method="POST">
+                                <button>Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>No posts yet. Create your first post!</p>
+            <% } %>
+        </section>
+    </main>
+</body>
+</html>
